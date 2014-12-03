@@ -40,13 +40,13 @@ static bool create_junk_file(const std::string& filename, const int64_t size)
 {
 	bool succ = false;
 
-	HANDLE file_handle = CreateFile(filename.c_str(), GENERIC_WRITE, 0, NULL, CREATE_NEW, FILE_FLAG_NO_BUFFERING, NULL);
+	HANDLE file_handle = CreateFile(filename.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_NEW, FILE_FLAG_NO_BUFFERING, nullptr);
 	if (file_handle != INVALID_HANDLE_VALUE)
 	{
 		LARGE_INTEGER file_pos;
 		file_pos.QuadPart = size;
 
-		if (SetFilePointerEx(file_handle, file_pos, NULL, FILE_BEGIN) != FALSE)
+		if (SetFilePointerEx(file_handle, file_pos, nullptr, FILE_BEGIN) != FALSE)
 			succ = (SetEndOfFile(file_handle) != FALSE);
 
 		CloseHandle(file_handle);
