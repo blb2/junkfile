@@ -6,11 +6,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cinttypes>
+#include <cstddef>
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
-#include <iomanip>
 #include <string>
 #include <windows.h>
 

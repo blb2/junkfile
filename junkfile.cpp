@@ -7,12 +7,12 @@ static const std::string g_junk_filename_extension = "bin";
 
 ////////////////////////////////////////////////////////////////////////////////
 
-static __int64 get_free_space(void)
+static int64_t get_free_space(void)
 {
 	ULARGE_INTEGER free_bytes_avail;
 
 	if (GetDiskFreeSpaceEx(nullptr, &free_bytes_avail, nullptr, nullptr) != FALSE)
-		return static_cast<__int64>(free_bytes_avail.QuadPart);
+		return static_cast<int64_t>(free_bytes_avail.QuadPart);
 
 	return 0;
 }
@@ -36,7 +36,7 @@ static void get_next_filename(const std::string& filename_prefix, const std::str
 	filename = os.str();
 }
 
-static bool create_junk_file(const std::string& filename, const __int64 size)
+static bool create_junk_file(const std::string& filename, const int64_t size)
 {
 	bool succ = false;
 
@@ -69,8 +69,8 @@ int main(int argc, char* argv[])
 	if (argc != 2)
 		exit_msg("expected 1 argument, file size");
 
-	__int64 size = 0, free_space = get_free_space();
-	if (sscanf(argv[1], "%I64d", &size) != 1)
+	int64_t size = 0, free_space = get_free_space();
+	if (sscanf(argv[1], "%" SCNd64, &size) != 1)
 		exit_msg("could not parse argument, file size");
 
 	size *= 1024 * 1024; // MiB
