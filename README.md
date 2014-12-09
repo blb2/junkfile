@@ -2,6 +2,8 @@ junkfile
 ========
 A Windows utility for creating junk files.
 
+The current project page is located here: <https://github.com/bbrice/junkfile>
+
 Motivation
 ----------
 I made this utility for myself as a way to create dummy files of certain sizes
@@ -9,8 +11,6 @@ or to easily fill up a drive.  With a nearly full drive, I could test I/O
 conditions surrounding when the drive actually fills.  In Windows, it's
 roughly equivalent to running the command `fsutil file createnew JUNK N`,
 where `N` is the number of bytes to allocate for a file called `JUNK`.
-
-The current project page is located here: <https://github.com/bbrice/junkfile>
 
 Building
 --------
@@ -30,5 +30,5 @@ To fill up the current drive, leaving only 100 MB free:
 
 License
 -------
-junkfile is licensed under the BSD license. See [LICENSE.txt](LICENSE.txt)
+`junkfile` is licensed under the BSD license. See [LICENSE.txt](LICENSE.txt)
 for more info.
