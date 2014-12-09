@@ -1,4 +1,14 @@
-#include "stdafx.h"
+#include "targetver.h"
+#include <cinttypes>
+#include <cstddef>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <windows.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
