@@ -1,6 +1,7 @@
 *~
 *.swp
 
+*.aps
 *.opensdf
 *.sdf
 *.suo
