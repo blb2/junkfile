@@ -25,6 +25,10 @@
 #define STRICT
 #endif
 
+#ifndef STRICT_TYPED_ITEMIDS
+#define STRICT_TYPED_ITEMIDS
+#endif
+
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
