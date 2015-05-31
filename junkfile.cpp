@@ -79,11 +79,29 @@ int main(int argc, char* argv[])
 	if (argc != 2)
 		exit_msg("expected 1 argument, file size");
 
-	int64_t size = 0, free_space = get_free_space();
-	if (sscanf(argv[1], "%" SCNd64, &size) != 1)
+	char* units;
+	int64_t size = strtoll(argv[1], &units, 10), free_space = get_free_space();
+
+	if (size == 0)
 		exit_msg("could not parse argument, file size");
 
-	size *= 1024 * 1024; // MiB
+	if (units && *units != '\0')
+	{
+		switch (*units)
+		{
+			case 't': case 'T':
+				size *= 1024;
+			case 'g': case 'G':
+				size *= 1024;
+			case 'm': case 'M':
+				size *= 1024;
+			case 'k': case 'K':
+				size *= 1024;
+				break;
+			default:
+				exit_msg("unknown unit");
+		}
+	}
 
 	if (size < 0)
 		size = free_space + size;

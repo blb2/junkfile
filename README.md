@@ -18,15 +18,19 @@ At the moment, Visual Studio 2013.4 is used for this project.
 
 Usage
 -----
-This application takes only one argument: file size in MB.
+This application takes only one argument: file size and unit.
 
 To create a 100 MB file:
 
-	junkfile 100
+	junkfile 100M
 
 To fill up the current drive, leaving only 100 MB free:
 
-	junkfile -100
+	junkfile -100M
+
+Accepted units (not case sensitive):
+
+	K, M, G, or T
 
 License
 -------
