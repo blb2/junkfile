@@ -46,7 +46,7 @@ static void get_next_filename(const std::string& filename_prefix, const std::str
 	filename = os.str();
 }
 
-static bool create_junk_file(const std::string& filename, const int64_t size)
+static bool create_junk_file(const std::string& filename, int64_t size)
 {
 	bool succ = false;
 
