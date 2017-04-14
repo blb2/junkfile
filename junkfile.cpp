@@ -21,7 +21,7 @@ static int64_t get_free_space(void)
 {
 	ULARGE_INTEGER free_bytes_avail;
 
-	if (GetDiskFreeSpaceEx(nullptr, &free_bytes_avail, nullptr, nullptr) != FALSE)
+	if (GetDiskFreeSpaceEx(nullptr, &free_bytes_avail, nullptr, nullptr))
 		return static_cast<int64_t>(free_bytes_avail.QuadPart);
 
 	return 0;
@@ -32,13 +32,14 @@ static bool file_exists(const std::string& filename)
 	return GetFileAttributes(filename.c_str()) != INVALID_FILE_ATTRIBUTES;
 }
 
-static void get_next_filename(const std::string& filename_prefix, const std::string& extension, std::string& filename)
+static void get_next_filename(const std::string& filename_prefix,
+                              const std::string& extension,
+                                    std::string& filename)
 {
 	std::ostringstream os;
 	os << filename_prefix << '.' << extension;
 
-	for (size_t i = 1; file_exists(os.str()); i++)
-	{
+	for (size_t i = 1; file_exists(os.str()); i++) {
 		os.str("");
 		os << filename_prefix << std::setw(3) << std::setfill('0') << i << '.' << extension;
 	}
@@ -50,13 +51,14 @@ static bool create_junk_file(const std::string& filename, int64_t size)
 {
 	bool succ = false;
 
-	HANDLE file_handle = CreateFile(filename.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_NEW, FILE_FLAG_NO_BUFFERING, nullptr);
-	if (file_handle != INVALID_HANDLE_VALUE)
-	{
+	HANDLE file_handle = CreateFile(filename.c_str(), GENERIC_WRITE, 0, nullptr,
+	                                CREATE_NEW, FILE_FLAG_NO_BUFFERING, nullptr);
+
+	if (file_handle != INVALID_HANDLE_VALUE) {
 		LARGE_INTEGER file_pos;
 		file_pos.QuadPart = size;
 
-		if (SetFilePointerEx(file_handle, file_pos, nullptr, FILE_BEGIN) != FALSE)
+		if (SetFilePointerEx(file_handle, file_pos, nullptr, FILE_BEGIN))
 			succ = (SetEndOfFile(file_handle) != FALSE);
 
 		CloseHandle(file_handle);
@@ -85,21 +87,19 @@ int main(int argc, char* argv[])
 	if (size == 0)
 		exit_msg("could not parse argument, file size");
 
-	if (units && *units != '\0')
-	{
-		switch (*units)
-		{
-			case 't': case 'T':
-				size *= 1024;
-			case 'g': case 'G':
-				size *= 1024;
-			case 'm': case 'M':
-				size *= 1024;
-			case 'k': case 'K':
-				size *= 1024;
-				break;
-			default:
-				exit_msg("unknown unit");
+	if (units && *units != '\0') {
+		switch (*units) {
+		case 't': case 'T':
+			size *= 1024;
+		case 'g': case 'G':
+			size *= 1024;
+		case 'm': case 'M':
+			size *= 1024;
+		case 'k': case 'K':
+			size *= 1024;
+			break;
+		default:
+			exit_msg("unknown unit");
 		}
 	}
 
