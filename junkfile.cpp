@@ -89,13 +89,17 @@ int main(int argc, char* argv[])
 
 	if (units && *units != '\0') {
 		switch (*units) {
-		case 't': case 'T':
+		case 't':
+		case 'T':
 			size *= 1024;
-		case 'g': case 'G':
+		case 'g':
+		case 'G':
 			size *= 1024;
-		case 'm': case 'M':
+		case 'm':
+		case 'M':
 			size *= 1024;
-		case 'k': case 'K':
+		case 'k':
+		case 'K':
 			size *= 1024;
 			break;
 		default:
