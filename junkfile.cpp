@@ -89,21 +89,21 @@ int main(int argc, char* argv[])
 
 	if (units && *units != '\0') {
 		switch (*units) {
-		case 't':
-		case 'T':
-			size *= 1024;
-		case 'g':
-		case 'G':
-			size *= 1024;
-		case 'm':
-		case 'M':
-			size *= 1024;
-		case 'k':
-		case 'K':
-			size *= 1024;
-			break;
-		default:
-			exit_msg("unknown unit");
+			case 't':
+			case 'T':
+				size *= 1024;
+			case 'g':
+			case 'G':
+				size *= 1024;
+			case 'm':
+			case 'M':
+				size *= 1024;
+			case 'k':
+			case 'K':
+				size *= 1024;
+				break;
+			default:
+				exit_msg("unknown unit");
 		}
 	}
 
