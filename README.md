@@ -2,7 +2,7 @@ junkfile
 ========
 A Windows utility for creating junk files.
 
-The current project page is located here: <https://github.com/bbrice/junkfile>
+The current project page is located here: <https://github.com/blb2/junkfile>
 
 Motivation
 ----------
