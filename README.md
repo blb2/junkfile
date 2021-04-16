@@ -34,5 +34,4 @@ Accepted units (not case sensitive):
 
 License
 -------
-`junkfile` is licensed under the BSD license. See [LICENSE.txt](LICENSE.txt)
-for more info.
+`junkfile` is licensed under version 3 of the GPL or later. See [LICENSE.txt](LICENSE.txt) for more info.
