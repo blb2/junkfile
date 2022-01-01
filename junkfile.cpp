@@ -29,12 +29,8 @@
 #include <string>
 #include <windows.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 static const std::string g_junk_filename = "junkfile";
 static const std::string g_junk_filename_extension = "bin";
-
-////////////////////////////////////////////////////////////////////////////////
 
 static int64_t get_free_space(void)
 {
@@ -139,7 +135,4 @@ int main(int argc, char* argv[])
 		exit_msg("could not create junk file of requested size");
 
 	std::cout << "created file: " << filename << ", " << size << " bytes" << std::endl;
-	return 0;
 }
-
-////////////////////////////////////////////////////////////////////////////////
