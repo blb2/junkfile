@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021, Brian Brice. All rights reserved.
+ * Copyright (C) 2014-2022, Brian Brice. All rights reserved.
  *
  * This file is part of junkfile.
  *
@@ -29,10 +29,10 @@
 #include <string>
 #include <windows.h>
 
-static const std::string g_junk_filename = "junkfile";
-static const std::string g_junk_filename_extension = "bin";
+const std::string g_junk_filename = "junkfile";
+const std::string g_junk_filename_extension = "bin";
 
-static int64_t get_free_space(void)
+int64_t get_free_space(void)
 {
 	ULARGE_INTEGER free_bytes_avail;
 
@@ -42,14 +42,16 @@ static int64_t get_free_space(void)
 	return 0;
 }
 
-static bool file_exists(const std::string& filename)
+bool file_exists(const std::string& filename)
 {
 	return GetFileAttributes(filename.c_str()) != INVALID_FILE_ATTRIBUTES;
 }
 
-static void get_next_filename(const std::string& filename_prefix,
-                              const std::string& extension,
-                                    std::string& filename)
+void get_next_filename(
+	const std::string& filename_prefix,
+	const std::string& extension,
+	      std::string& filename
+)
 {
 	std::ostringstream os;
 	os << filename_prefix << '.' << extension;
@@ -62,21 +64,24 @@ static void get_next_filename(const std::string& filename_prefix,
 	filename = os.str();
 }
 
-static bool create_junk_file(const std::string& filename, int64_t size)
+bool create_junk_file(const std::string& filename, int64_t size)
 {
 	bool succ = false;
 
-	HANDLE file_handle = CreateFile(filename.c_str(), GENERIC_WRITE, 0, nullptr,
-	                                CREATE_NEW, FILE_FLAG_NO_BUFFERING, nullptr);
+	HANDLE h_file = CreateFile(
+		filename.c_str(), GENERIC_WRITE, 0, nullptr,
+		CREATE_NEW, FILE_FLAG_NO_BUFFERING, nullptr
+	);
 
-	if (file_handle != INVALID_HANDLE_VALUE) {
+	if (h_file != INVALID_HANDLE_VALUE) {
 		LARGE_INTEGER file_pos;
 		file_pos.QuadPart = size;
 
-		if (SetFilePointerEx(file_handle, file_pos, nullptr, FILE_BEGIN))
-			succ = (SetEndOfFile(file_handle) != FALSE);
+		if (SetFilePointerEx(h_file, file_pos, nullptr, FILE_BEGIN))
+			succ = (SetEndOfFile(h_file) != FALSE);
 
-		CloseHandle(file_handle);
+		CloseHandle(h_file);
+		h_file = INVALID_HANDLE_VALUE;
 
 		if (!succ)
 			DeleteFile(filename.c_str());
@@ -85,7 +90,7 @@ static bool create_junk_file(const std::string& filename, int64_t size)
 	return succ;
 }
 
-static void exit_msg(const std::string& msg)
+void exit_msg(const std::string& msg)
 {
 	std::cerr << "error: " << msg << std::endl;
 	exit(EXIT_FAILURE);
