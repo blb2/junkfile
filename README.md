@@ -13,7 +13,7 @@ the number of bytes to allocate for a file called `JUNK`.
 
 
 ## Building
-At the moment, Visual Studio 2022 is used for this project.
+At the moment, Visual Studio 2026 is used for this project.
 
 
 ## Usage
